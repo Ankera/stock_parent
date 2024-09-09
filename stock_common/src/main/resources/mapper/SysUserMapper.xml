@@ -36,6 +36,10 @@
         from sys_user
         where  id = #{id,jdbcType=BIGINT} 
     </select>
+    <select id="findUserInfoByUsername" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" />
+        from sys_user where username = #{username}
+    </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete from sys_user

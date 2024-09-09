@@ -1,6 +1,7 @@
 package com.ankers.mapper;
 
 import com.ankers.pojo.entity.SysUser;
+import org.apache.ibatis.annotations.Param;
 
 /**
 * @author yuyayong
@@ -22,4 +23,5 @@ public interface SysUserMapper {
 
     int updateByPrimaryKey(SysUser record);
 
+    SysUser findUserInfoByUsername(@Param("username") String username);
 }
