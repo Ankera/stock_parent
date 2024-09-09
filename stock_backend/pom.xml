@@ -9,8 +9,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>stock_backend</artifactId>
     <packaging>jar</packaging>
+    <artifactId>stock_backend</artifactId>
     <description>
         定义股票数据展示后端工程
     </description>
@@ -67,4 +67,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

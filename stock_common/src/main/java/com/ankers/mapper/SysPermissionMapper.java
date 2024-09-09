@@ -5,7 +5,7 @@ import com.ankers.pojo.entity.SysPermission;
 /**
 * @author yuyayong
 * @description 针对表【sys_permission(权限表（菜单）)】的数据库操作Mapper
-* @createDate 2024-09-08 23:46:08
+* @createDate 2024-09-10 00:45:52
 * @Entity com.ankers.pojo.entity.SysPermission
 */
 public interface SysPermissionMapper {

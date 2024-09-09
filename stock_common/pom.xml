@@ -9,8 +9,9 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>stock_common</artifactId>
     <packaging>jar</packaging>
+    <artifactId>stock_common</artifactId>
+    <description>定义公共资源抽取的工程，打成jar包，被其它工程引用</description>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -52,6 +53,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
+            <version>32.0.0-android</version>
         </dependency>
 
         <!--分页插件-->

@@ -5,7 +5,7 @@ import com.ankers.pojo.entity.StockRtInfo;
 /**
 * @author yuyayong
 * @description 针对表【stock_rt_info(个股详情信息表)】的数据库操作Mapper
-* @createDate 2024-09-08 23:46:08
+* @createDate 2024-09-10 00:45:52
 * @Entity com.ankers.pojo.entity.StockRtInfo
 */
 public interface StockRtInfoMapper {

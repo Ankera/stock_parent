@@ -1,12 +1,11 @@
 package com.ankers.mapper;
 
 import com.ankers.pojo.entity.SysUser;
-import org.apache.ibatis.annotations.Param;
 
 /**
 * @author yuyayong
 * @description 针对表【sys_user(用户表)】的数据库操作Mapper
-* @createDate 2024-09-08 23:46:08
+* @createDate 2024-09-10 00:45:52
 * @Entity com.ankers.pojo.entity.SysUser
 */
 public interface SysUserMapper {
@@ -23,5 +22,4 @@ public interface SysUserMapper {
 
     int updateByPrimaryKey(SysUser record);
 
-    SysUser findUserInfoByUsername(@Param("username") String username);
 }

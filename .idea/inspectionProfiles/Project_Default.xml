@@ -12,6 +12,7 @@
           <option value="stock_common" />
           <option value="stock_backend" />
           <option value="stock_backend" />
+          <option value="stock_backend" />
         </list>
       </option>
       <option name="ignoredPackages">
@@ -20,10 +21,12 @@
           <option value="org.apache.commons:commons-compress:1.19" />
           <option value="com.github.pagehelper:pagehelper:5.1.10" />
           <option value="org.apache.commons:commons-compress:1.19" />
+          <option value="com.google.guava:guava:30.0-jre" />
         </list>
       </option>
       <option name="ignoredReasons">
         <list>
+          <option value="Not exploitable" />
           <option value="Not exploitable" />
           <option value="Not exploitable" />
           <option value="Not exploitable" />
