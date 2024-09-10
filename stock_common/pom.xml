@@ -3,19 +3,19 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
     <parent>
-        <groupId>com.ankers</groupId>
+        <groupId>com.ankers.stock</groupId>
         <artifactId>stock_parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <packaging>jar</packaging>
     <artifactId>stock_common</artifactId>
     <description>定义公共资源抽取的工程，打成jar包，被其它工程引用</description>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -43,7 +43,7 @@
             <artifactId>gson</artifactId>
         </dependency>
 
-        <!--jode日期插件-->
+        <!--日期插件-->
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
@@ -53,7 +53,6 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>32.0.0-android</version>
         </dependency>
 
         <!--分页插件-->

@@ -2,7 +2,7 @@
   <profile version="1.0">
     <option name="myName" value="Project Default" />
     <inspection_tool class="JavadocDeclaration" enabled="true" level="WARNING" enabled_by_default="true">
-      <option name="ADDITIONAL_TAGS" value="description,createDate,Entity,RestController,ResponseBody,Controller" />
+      <option name="ADDITIONAL_TAGS" value="description,createDate,Entity" />
     </inspection_tool>
     <inspection_tool class="VulnerableLibrariesLocal" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="isIgnoringEnabled" value="true" />
@@ -10,6 +10,23 @@
         <list>
           <option value="stock_common" />
           <option value="stock_common" />
+          <option value="stock_common" />
+          <option value="stock_common" />
+          <option value="stock_common" />
+          <option value="stock_common" />
+          <option value="stock_common" />
+          <option value="stock_common" />
+          <option value="stock_common" />
+          <option value="stock_common" />
+          <option value="stock_common" />
+          <option value="stock_common" />
+          <option value="stock_backend" />
+          <option value="stock_backend" />
+          <option value="stock_backend" />
+          <option value="stock_backend" />
+          <option value="stock_backend" />
+          <option value="stock_backend" />
+          <option value="stock_backend" />
           <option value="stock_backend" />
           <option value="stock_backend" />
           <option value="stock_backend" />
@@ -17,15 +34,49 @@
       </option>
       <option name="ignoredPackages">
         <list>
-          <option value="com.github.pagehelper:pagehelper:5.1.10" />
-          <option value="org.apache.commons:commons-compress:1.19" />
-          <option value="com.github.pagehelper:pagehelper:5.1.10" />
-          <option value="org.apache.commons:commons-compress:1.19" />
+          <option value="ch.qos.logback:logback-classic:1.2.4" />
+          <option value="ch.qos.logback:logback-core:1.2.4" />
+          <option value="org.springframework.boot:spring-boot-autoconfigure:2.5.3" />
+          <option value="org.springframework.boot:spring-boot:2.5.3" />
+          <option value="org.springframework:spring-beans:5.3.9" />
+          <option value="org.springframework:spring-context:5.3.9" />
+          <option value="org.springframework:spring-core:5.3.9" />
+          <option value="org.yaml:snakeyaml:1.28" />
           <option value="com.google.guava:guava:30.0-jre" />
+          <option value="com.github.pagehelper:pagehelper:5.1.10" />
+          <option value="org.springframework:spring-expression:5.3.9" />
+          <option value="org.apache.commons:commons-compress:1.19" />
+          <option value="com.github.pagehelper:pagehelper:5.1.10" />
+          <option value="com.google.code.gson:gson:2.8.7" />
+          <option value="com.google.guava:guava:30.0-jre" />
+          <option value="com.mysql:mysql-connector-j:8.0.32" />
+          <option value="org.apache.commons:commons-compress:1.19" />
+          <option value="org.springframework.boot:spring-boot-autoconfigure:2.5.3" />
+          <option value="org.springframework.boot:spring-boot:2.5.3" />
+          <option value="org.springframework:spring-beans:5.3.9" />
+          <option value="org.springframework:spring-context:5.3.9" />
+          <option value="org.springframework:spring-core:5.3.9" />
         </list>
       </option>
       <option name="ignoredReasons">
         <list>
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
           <option value="Not exploitable" />
           <option value="Not exploitable" />
           <option value="Not exploitable" />

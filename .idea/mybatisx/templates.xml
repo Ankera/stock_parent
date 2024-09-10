@@ -6,7 +6,7 @@
         <option name="generateConfig">
           <GenerateConfig>
             <option name="annotationType" value="NONE" />
-            <option name="basePackage" value="com.ankers.pojo" />
+            <option name="basePackage" value="com.ankers.stock.pojo" />
             <option name="basePath" value="src/main/java" />
             <option name="classNameStrategy" value="camel" />
             <option name="encoding" value="UTF-8" />
@@ -27,7 +27,7 @@
                   <option name="fileName" value="${domain.fileName}Mapper" />
                   <option name="fileNameWithSuffix" value="${domain.fileName}Mapper.java" />
                   <option name="modulePath" value="$PROJECT_DIR$/stock_common" />
-                  <option name="packageName" value="com.ankers.mapper" />
+                  <option name="packageName" value="com.ankers.stock.mapper" />
                 </ModuleInfoGo>
                 <ModuleInfoGo>
                   <option name="basePath" value="src/main/resources" />

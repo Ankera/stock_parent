@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ankers.mapper.StockMarketIndexInfoMapper">
+<mapper namespace="com.ankers.stock.mapper.StockMarketIndexInfoMapper">
 
-    <resultMap id="BaseResultMap" type="com.ankers.pojo.entity.StockMarketIndexInfo">
+    <resultMap id="BaseResultMap" type="com.ankers.stock.pojo.entity.StockMarketIndexInfo">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="marketCode" column="market_code" jdbcType="CHAR"/>
             <result property="marketName" column="market_name" jdbcType="VARCHAR"/>
@@ -36,7 +36,7 @@
         delete from stock_market_index_info
         where  id = #{id,jdbcType=BIGINT} 
     </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ankers.pojo.entity.StockMarketIndexInfo" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ankers.stock.pojo.entity.StockMarketIndexInfo" useGeneratedKeys="true">
         insert into stock_market_index_info
         ( id,market_code,market_name
         ,pre_close_point,open_point,cur_point
@@ -47,7 +47,7 @@
         ,#{minPoint,jdbcType=DECIMAL},#{maxPoint,jdbcType=DECIMAL},#{tradeAmount,jdbcType=BIGINT}
         ,#{tradeVolume,jdbcType=DECIMAL},#{curTime,jdbcType=TIMESTAMP})
     </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ankers.pojo.entity.StockMarketIndexInfo" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ankers.stock.pojo.entity.StockMarketIndexInfo" useGeneratedKeys="true">
         insert into stock_market_index_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="id != null">id,</if>
@@ -76,7 +76,7 @@
                 <if test="curTime != null">#{curTime,jdbcType=TIMESTAMP},</if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.ankers.pojo.entity.StockMarketIndexInfo">
+    <update id="updateByPrimaryKeySelective" parameterType="com.ankers.stock.pojo.entity.StockMarketIndexInfo">
         update stock_market_index_info
         <set>
                 <if test="marketCode != null">
@@ -112,7 +112,7 @@
         </set>
         where   id = #{id,jdbcType=BIGINT} 
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.ankers.pojo.entity.StockMarketIndexInfo">
+    <update id="updateByPrimaryKey" parameterType="com.ankers.stock.pojo.entity.StockMarketIndexInfo">
         update stock_market_index_info
         set 
             market_code =  #{marketCode,jdbcType=CHAR},
