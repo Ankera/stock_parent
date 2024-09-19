@@ -10,4 +10,6 @@ public class LoginReqVo {
     private String password;
 
     private String code;
+
+    private String sessionId;
 }

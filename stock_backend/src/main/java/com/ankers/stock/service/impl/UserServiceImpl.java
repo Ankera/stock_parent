@@ -1,6 +1,7 @@
 package com.ankers.stock.service.impl;
 
 import cn.hutool.captcha.LineCaptcha;
+import com.ankers.stock.constant.StockConstant;
 import com.ankers.stock.mapper.SysUserMapper;
 import com.ankers.stock.pojo.entity.SysUser;
 import com.ankers.stock.service.UserService;
@@ -45,13 +46,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public R<LoginRespVo> login(LoginReqVo vo) {
-        if (vo == null ||
-                StringUtils.isBlank(vo.getUsername()) ||
-                StringUtils.isBlank(vo.getPassword()) ||
-                StringUtils.isBlank(vo.getCode())) {
+        if (vo == null || StringUtils.isBlank(vo.getUsername()) || StringUtils.isBlank(vo.getPassword())) {
+            return R.error(ResponseCode.USERNAME_OR_PASSWORD_ERROR);
+        }
 
-                return R.error(ResponseCode.USERNAME_OR_PASSWORD_ERROR);
-            }
+        if (StringUtils.isBlank(vo.getCode()) || StringUtils.isBlank(vo.getSessionId())) {
+            return R.error(ResponseCode.CHECK_CODE_NOT_EMPTY);
+        }
+
+        String redisCode = (String) redisTemplate.opsForValue().get(StockConstant.CHECK_PREFIX + vo.getSessionId());
+        if (StringUtils.isBlank(redisCode)) {
+            // 验证码过期
+            return R.error(ResponseCode.CHECK_CODE_TIMEOUT);
+        }
+
+        if (!redisCode.equalsIgnoreCase(vo.getCode())) {
+            return R.error(ResponseCode.CHECK_CODE_ERROR);
+        }
 
         SysUser user = findByUsername(vo.getUsername());
         if (user == null) {
@@ -61,6 +72,8 @@ public class UserServiceImpl implements UserService {
         if (!passwordEncoder.matches(vo.getPassword(), user.getPassword())) {
             return R.error(ResponseCode.USERNAME_OR_PASSWORD_ERROR);
         }
+
+       log.info("登录返回vo的信息: {}", vo);
 
         LoginRespVo respVo = new LoginRespVo();
 
@@ -78,7 +91,7 @@ public class UserServiceImpl implements UserService {
         String sessionId = String.valueOf(idWorker.nextId());
 
         log.info("当前生产的图片校验码：{}， 会话ID：{}", code, sessionId);
-        redisTemplate.opsForValue().set("CK:"+sessionId, code, 5, TimeUnit.MINUTES);
+        redisTemplate.opsForValue().set(StockConstant.CHECK_PREFIX + sessionId, code, 5, TimeUnit.MINUTES);
 
         Map<String, String> data = new HashMap<>();
         data.put("imageData", imageData);
