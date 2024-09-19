@@ -16,6 +16,9 @@ spring:
       # 获取连接时最大等待时间，单位毫秒。配置了 maxWait 之后，缺省启用公平锁，
       # 并发效率会有所下降，如果需要可以通过配置 useUnfairLock 属性为 true 使用非公平锁。
       maxWait: 60000
+  profiles:
+    # 激活其他配置文件 application-cache.yml, 多个文件 《,》 分割
+    active: cache
 # 配置mybatis
 mybatis:
   configuration:

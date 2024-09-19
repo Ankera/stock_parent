@@ -31,4 +31,12 @@ public class TestPasswordEncoder {
         boolean isSuccess = passwordEncoder.matches(pwd, encodePwd);
         System.out.println(isSuccess?"匹配成功":"匹配失败");
     }
+
+    @Test
+    public void test01() {
+        String encodePwd = "$2a$10$JqoiFCw4LUj184ghgynYp.4kW5BVeAZYjKqu7xEKceTaq7X3o4I4W";
+        String pwd="123456";
+        boolean isSuccess = passwordEncoder.matches(pwd, encodePwd);
+        System.out.println(isSuccess?"匹配成功":"匹配失败");
+    }
 }

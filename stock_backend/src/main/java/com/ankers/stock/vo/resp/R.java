@@ -38,12 +38,15 @@ public class R<T> implements Serializable {
     public static <T> R<T> ok(){
         return new R<T>(SUCCESS_CODE,"success");
     }
+
     public static <T> R<T> ok(String msg){
         return new R<T>(SUCCESS_CODE,msg);
     }
+
     public static <T> R<T> ok(T data){
         return new R<T>(SUCCESS_CODE,data);
     }
+
     public static <T> R<T> ok(String msg, T data){
         return new R<T>(SUCCESS_CODE,msg,data);
     }

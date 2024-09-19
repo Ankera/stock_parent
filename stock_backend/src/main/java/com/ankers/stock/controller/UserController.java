@@ -8,20 +8,28 @@ import com.ankers.stock.vo.resp.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController // === @Controller + @ResponseBody
-//@RequestMapping("/api")
+@RequestMapping("/api")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping("/user/{username}")
-    public SysUser getUserByUsername(@PathVariable("username") String username) {
-        return userService.findByUsername(username);
+    @GetMapping("/user/info")
+    public R<Object> getUserByUsername() {
+        SysUser user = userService.findByUsername("admin");
+        return R.ok("查询成功", user);
     }
 
     @PostMapping("/user/login")
     public R<LoginRespVo> login(@RequestBody LoginReqVo vo) {
         return userService.login(vo);
+    }
+
+    @GetMapping("/captcha")
+    public R<Map> getCheckCode(){
+        return userService.getCheckCode();
     }
 }
