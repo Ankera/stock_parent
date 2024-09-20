@@ -30,6 +30,7 @@
           <option value="stock_backend" />
           <option value="stock_backend" />
           <option value="stock_backend" />
+          <option value="stock_backend" />
         </list>
       </option>
       <option name="ignoredPackages">
@@ -56,10 +57,12 @@
           <option value="org.springframework:spring-beans:5.3.9" />
           <option value="org.springframework:spring-context:5.3.9" />
           <option value="org.springframework:spring-core:5.3.9" />
+          <option value="cn.hutool:hutool-all:5.7.21" />
         </list>
       </option>
       <option name="ignoredReasons">
         <list>
+          <option value="Not exploitable" />
           <option value="Not exploitable" />
           <option value="Not exploitable" />
           <option value="Not exploitable" />
