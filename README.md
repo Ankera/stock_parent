@@ -27,6 +27,9 @@ http://182.92.130.109:3000/
 
 #### swagger 自动同步 yapi
 ```text
+swagger 插件
+https://blog.csdn.net/qq_31536117/article/details/134638624
+
 项目启动之后，打开链接 
 http://192.168.31.237:8091/v2/api-docs
 
@@ -34,3 +37,4 @@ http://192.168.31.237:8091/v2/api-docs
 /var/node/swagger-json/swagger.json
 ```
 ![img_2.png](img_2.png)
+![img_3.png](img_3.png)

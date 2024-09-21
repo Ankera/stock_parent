@@ -1,0 +1,10 @@
+stock:
+  inner:
+    - sh000001
+    - SZ399001
+  outer: # 外盛
+    - int_dja # 道球期
+    - int_nasdaq # 纳斯达克
+    - int_hangseng # 恒生
+    - int_nikkei # 日经指数
+    - b_FSST

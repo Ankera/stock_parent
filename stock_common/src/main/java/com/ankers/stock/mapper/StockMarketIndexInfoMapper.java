@@ -1,6 +1,11 @@
 package com.ankers.stock.mapper;
 
+import com.ankers.stock.pojo.domain.InnerMarketDomain;
 import com.ankers.stock.pojo.entity.StockMarketIndexInfo;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
+import java.util.List;
 
 /**
 * @author yuyayong
@@ -21,5 +26,13 @@ public interface StockMarketIndexInfoMapper {
     int updateByPrimaryKeySelective(StockMarketIndexInfo record);
 
     int updateByPrimaryKey(StockMarketIndexInfo record);
+
+    /**
+     * 根据指定时间点查询大盘数据
+     * @param curDate 指定时间点
+     * @param marketCodes 编码
+     * @return
+     */
+    List<InnerMarketDomain> getMarketInfo(@Param("curDate") Date curDate, @Param("marketCodes") List<String> marketCodes);
 
 }

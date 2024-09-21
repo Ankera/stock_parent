@@ -1,12 +1,15 @@
 package com.ankers.stock.config;
 
+import com.ankers.stock.pojo.vo.StockInfoConfig;
 import com.ankers.stock.utils.IdWorker;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
+@EnableConfigurationProperties(StockInfoConfig.class) // 开启配置，随用谁配置
 public class CommonConfig {
 
     /**
