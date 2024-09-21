@@ -1,6 +1,7 @@
 package com.ankers.stock.mapper;
 
 import com.ankers.stock.pojo.domain.InnerMarketDomain;
+import com.ankers.stock.pojo.domain.StockBlockDomain;
 import com.ankers.stock.pojo.entity.StockMarketIndexInfo;
 import org.apache.ibatis.annotations.Param;
 
@@ -34,5 +35,7 @@ public interface StockMarketIndexInfoMapper {
      * @return
      */
     List<InnerMarketDomain> getMarketInfo(@Param("curDate") Date curDate, @Param("marketCodes") List<String> marketCodes);
+
+    List<StockBlockDomain> getSectorAll(@Param("curDate") Date curDate);
 
 }

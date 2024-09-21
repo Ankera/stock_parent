@@ -1,6 +1,7 @@
 package com.ankers.stock.service;
 
 import com.ankers.stock.pojo.domain.InnerMarketDomain;
+import com.ankers.stock.pojo.domain.StockBlockDomain;
 import com.ankers.stock.vo.resp.R;
 
 import java.util.List;
@@ -12,4 +13,6 @@ public interface StockService {
      * @return
      */
     R<List<InnerMarketDomain>> getInnerMarketInfo();
+
+    R<List<StockBlockDomain>> getSectorAll();
 }

@@ -1,6 +1,7 @@
 package com.ankers.stock.controller;
 
 import com.ankers.stock.pojo.domain.InnerMarketDomain;
+import com.ankers.stock.pojo.domain.StockBlockDomain;
 import com.ankers.stock.service.StockService;
 import io.swagger.annotations.Api;
 import com.ankers.stock.vo.resp.R;
@@ -23,9 +24,18 @@ public class StockController {
     /**
      * 获取国内大盘最新的数据
      */
-    @ApiOperation(value = "该接口获取国内大盘最新的数据", notes = "获取国内大盘最新的数据", httpMethod = "GET")
+    @ApiOperation(value = "获取国内大盘最新的数据", notes = "获取国内大盘最新的数据", httpMethod = "GET")
     @GetMapping("/index/all")
     public R<List<InnerMarketDomain>> getInnerMarketInfo() {
         return stockService.getInnerMarketInfo();
+    }
+
+    /**
+     * 国内板块指数业务分析
+     */
+    @ApiOperation(value = "国内板块指数业务分析", notes = "国内板块指数业务分析", httpMethod = "GET")
+    @GetMapping("/sector/all")
+    public R<List<StockBlockDomain>> getSectorAll() {
+        return stockService.getSectorAll();
     }
 }
