@@ -36,6 +36,6 @@ public interface StockMarketIndexInfoMapper {
      */
     List<InnerMarketDomain> getMarketInfo(@Param("curDate") Date curDate, @Param("marketCodes") List<String> marketCodes);
 
-    List<StockBlockDomain> getSectorAll(@Param("curDate") Date curDate);
+    List<StockBlockDomain> getSectorIndustry(@Param("curDate") Date curDate);
 
 }

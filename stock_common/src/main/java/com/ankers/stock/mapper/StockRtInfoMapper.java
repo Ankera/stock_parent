@@ -1,6 +1,11 @@
 package com.ankers.stock.mapper;
 
+import com.ankers.stock.pojo.domain.StockUpDownDomain;
 import com.ankers.stock.pojo.entity.StockRtInfo;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
+import java.util.List;
 
 /**
 * @author yuyayong
@@ -22,4 +27,5 @@ public interface StockRtInfoMapper {
 
     int updateByPrimaryKey(StockRtInfo record);
 
+    List<StockUpDownDomain> getStockInfoByTime(@Param("curDate") Date curDate);
 }

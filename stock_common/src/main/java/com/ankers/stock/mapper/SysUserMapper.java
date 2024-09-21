@@ -3,6 +3,8 @@ package com.ankers.stock.mapper;
 import com.ankers.stock.pojo.entity.SysUser;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
 * @author yuyayong
 * @description 针对表【sys_user(用户表)】的数据库操作Mapper
@@ -24,4 +26,6 @@ public interface SysUserMapper {
     int updateByPrimaryKey(SysUser record);
 
     SysUser findUserInfoByUsername(@Param("username") String username);
+
+    List<SysUser> findAll();
 }

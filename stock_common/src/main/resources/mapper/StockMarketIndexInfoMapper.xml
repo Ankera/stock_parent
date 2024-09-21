@@ -51,7 +51,7 @@
             #{mCode}
         </foreach>
     </select>
-    <select id="getSectorAll" resultType="com.ankers.stock.pojo.domain.StockBlockDomain">
+    <select id="getSectorIndustry" resultType="com.ankers.stock.pojo.domain.StockBlockDomain">
         select
             sbr.company_num as companyNum,
             sbr.trade_amount as tradeAmt,
