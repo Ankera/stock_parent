@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /**
 * @author yuyayong
@@ -28,4 +30,17 @@ public interface StockRtInfoMapper {
     int updateByPrimaryKey(StockRtInfo record);
 
     List<StockUpDownDomain> getStockInfoByTime(@Param("curDate") Date curDate);
+
+    /**
+     * 统计指定日期范围内股票涨停或者跌停的数量流水
+     * @param startDate 开盘时间
+     * @param endDate 停盘时间
+     * @param flag 1 涨停
+     *             0 跌停
+     * @return
+     */
+    List<Map> getStockUpDownCount(
+            @Param("startDate") Date startDate,
+            @Param("endDate") Date endDate,
+            @Param("flag") int flag);
 }

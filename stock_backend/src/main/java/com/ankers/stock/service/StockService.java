@@ -7,6 +7,7 @@ import com.ankers.stock.vo.resp.PageResult;
 import com.ankers.stock.vo.resp.R;
 
 import java.util.List;
+import java.util.Map;
 
 public interface StockService {
 
@@ -19,4 +20,6 @@ public interface StockService {
     R<List<StockBlockDomain>> getSectorIndustry();
 
     R<List<PageResult<StockUpDownDomain>>> getSectorInfoByPage(Integer page, Integer pageSize);
+
+    R<Map<String, List>> getStockUpDownCount();
 }

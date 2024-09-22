@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Api(value = "/api/quot", tags = {"定义股票相关控制器"})
@@ -52,13 +53,24 @@ public class StockController {
      * @return
      */
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType = "query", dataType = "int", name = "page", value = "1"),
-            @ApiImplicitParam(paramType = "query", dataType = "int", name = "pageSize", value = "20")
+            @ApiImplicitParam(paramType = "query", dataType = "int", name = "page", value = ""),
+            @ApiImplicitParam(paramType = "query", dataType = "int", name = "pageSize", value = "")
     })
     @ApiOperation(value = "根据分页查询最新股票交易数据", notes = "根据分页查询最新股票交易数据", httpMethod = "GET")
     @GetMapping("/sector/all")
     public R<List<PageResult<StockUpDownDomain>>> getSectorInfoByPage(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                                                                       @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
         return stockService.getSectorInfoByPage(page, pageSize);
+    }
+
+    /**
+     * 统计股票最新交易日内每分钟涨跌停
+     * 涨跌停的股票数量
+     * @return
+     */
+    @ApiOperation(value = "统计股票最新交易日内每分钟涨跌停", notes = "统计股票最新交易日内每分钟涨跌停", httpMethod = "GET")
+    @GetMapping("/stock/updown/count")
+    public R<Map<String, List>> getStockUpDownCount() {
+        return stockService.getStockUpDownCount();
     }
 }

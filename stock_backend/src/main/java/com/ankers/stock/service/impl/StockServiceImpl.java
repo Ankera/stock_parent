@@ -18,9 +18,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * 股票服务实现
@@ -58,7 +56,6 @@ public class StockServiceImpl implements StockService {
 
     /**
      * 获取行业股票最新数据
-     * @return
      */
     @Override
     public R<List<StockBlockDomain>> getSectorIndustry() {
@@ -85,5 +82,29 @@ public class StockServiceImpl implements StockService {
         PageResult<StockUpDownDomain> pageResult = new PageResult<>(pageInfo);
 
         return R.ok(Collections.singletonList(pageResult));
+    }
+
+    /**
+     * 统计股票最新交易日内每分钟涨跌停的股票数量
+     */
+    @Override
+    public R<Map<String, List>> getStockUpDownCount() {
+        DateTime curDateTime = DateTimeUtil.getLastDate4Stock(DateTime.now());
+        curDateTime = DateTime.parse( "2022-01-06 14:25:00", DateTimeFormat.forPattern("YYYY-MM-dd HH:mm:Ss"));
+        Date endDate = curDateTime.toDate();
+
+        Date startDate = DateTimeUtil.getOpenDate(curDateTime).toDate();
+
+        // 涨停
+        List<Map> upList = stockRtInfoMapper.getStockUpDownCount(startDate, endDate, 0);
+
+        // 跌停
+        List<Map> downList = stockRtInfoMapper.getStockUpDownCount(startDate, endDate, 1);
+
+        Map<String, List> map = new HashMap<>();
+
+        map.put("upList", upList);
+        map.put("downList", downList);
+        return R.ok(map);
     }
 }
