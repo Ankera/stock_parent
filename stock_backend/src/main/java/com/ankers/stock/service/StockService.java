@@ -6,6 +6,7 @@ import com.ankers.stock.pojo.domain.StockUpDownDomain;
 import com.ankers.stock.vo.resp.PageResult;
 import com.ankers.stock.vo.resp.R;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +20,15 @@ public interface StockService {
 
     R<List<StockBlockDomain>> getSectorIndustry();
 
-    R<List<PageResult<StockUpDownDomain>>> getSectorInfoByPage(Integer page, Integer pageSize);
+    R<PageResult<StockUpDownDomain>> getSectorInfoByPage(Integer page, Integer pageSize);
 
     R<Map<String, List>> getStockUpDownCount();
+
+    /**
+     * 导出指定页码最新股票信息
+     * @param page
+     * @param pageSize
+     * @param response
+     */
+    void exportStockUpDownInfo(Integer page, Integer pageSize, HttpServletResponse response);
 }

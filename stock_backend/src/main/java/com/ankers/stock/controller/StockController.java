@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -57,8 +58,8 @@ public class StockController {
             @ApiImplicitParam(paramType = "query", dataType = "int", name = "pageSize", value = "")
     })
     @ApiOperation(value = "根据分页查询最新股票交易数据", notes = "根据分页查询最新股票交易数据", httpMethod = "GET")
-    @GetMapping("/sector/all")
-    public R<List<PageResult<StockUpDownDomain>>> getSectorInfoByPage(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+    @GetMapping("/stock/all")
+    public R<PageResult<StockUpDownDomain>> getSectorInfoByPage(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                                                                       @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
         return stockService.getSectorInfoByPage(page, pageSize);
     }
@@ -72,5 +73,23 @@ public class StockController {
     @GetMapping("/stock/updown/count")
     public R<Map<String, List>> getStockUpDownCount() {
         return stockService.getStockUpDownCount();
+    }
+
+    /**
+     * 导出指定页码最新股票信息
+     * @param page
+     * @param pageSize
+     * @param response
+     */
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", dataType = "int", name = "page", value = ""),
+            @ApiImplicitParam(paramType = "query", dataType = "int", name = "pageSize", value = "")
+    })
+    @ApiOperation(value = "导出指定页码最新股票信息", notes = "导出指定页码最新股票信息", httpMethod = "GET")
+    @GetMapping("/stock/export")
+    public void exportStockUpDownInfo(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                      @RequestParam(value = "pageSize", required = false, defaultValue = "20") Integer pageSize,
+                                      HttpServletResponse response) {
+        stockService.exportStockUpDownInfo(page, pageSize, response);
     }
 }

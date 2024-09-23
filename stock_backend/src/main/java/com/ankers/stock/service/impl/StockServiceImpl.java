@@ -1,5 +1,6 @@
 package com.ankers.stock.service.impl;
 
+import com.alibaba.excel.EasyExcel;
 import com.ankers.stock.mapper.StockMarketIndexInfoMapper;
 import com.ankers.stock.mapper.StockRtInfoMapper;
 import com.ankers.stock.pojo.domain.InnerMarketDomain;
@@ -10,14 +11,21 @@ import com.ankers.stock.service.StockService;
 import com.ankers.stock.utils.DateTimeUtil;
 import com.ankers.stock.vo.resp.PageResult;
 import com.ankers.stock.vo.resp.R;
+import com.ankers.stock.vo.resp.ResponseCode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.ApiModel;
+import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.*;
 
 /**
@@ -25,6 +33,7 @@ import java.util.*;
  */
 @ApiModel(description = "股票服务实现")
 @Service("stockService")
+@Slf4j
 public class StockServiceImpl implements StockService {
 
     @Autowired
@@ -68,7 +77,7 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
-    public R<List<PageResult<StockUpDownDomain>>> getSectorInfoByPage(Integer page, Integer pageSize) {
+    public R<PageResult<StockUpDownDomain>> getSectorInfoByPage(Integer page, Integer pageSize) {
         Date curDate = DateTimeUtil.getLastDate4Stock(DateTime.now()).toDate();
 
         curDate = DateTime.parse( "2021-12-30 09:42:00", DateTimeFormat.forPattern("YYYY-MM-dd HH:mm:Ss")).toDate();
@@ -81,7 +90,7 @@ public class StockServiceImpl implements StockService {
 
         PageResult<StockUpDownDomain> pageResult = new PageResult<>(pageInfo);
 
-        return R.ok(Collections.singletonList(pageResult));
+        return R.ok(pageResult);
     }
 
     /**
@@ -106,5 +115,39 @@ public class StockServiceImpl implements StockService {
         map.put("upList", upList);
         map.put("downList", downList);
         return R.ok(map);
+    }
+
+    /**
+     * 导出指定页码最新股票信息
+     * @param page
+     * @param pageSize
+     * @param response
+     */
+    @Override
+    public void exportStockUpDownInfo(Integer page, Integer pageSize, HttpServletResponse response) {
+        R<PageResult<StockUpDownDomain>> r = this.getSectorInfoByPage(page, pageSize);
+        List<StockUpDownDomain> rows = r.getData().getRows();
+
+        response.setContentType("application/vnd.ms-excel");
+        response.setCharacterEncoding("utf-8");
+
+        String filename = null;
+        try {
+            filename = URLEncoder.encode("latest_stock_info", "utf-8");
+            response.setHeader("Content-disposition", "attachment;filename=" + filename + ".xlsx");
+            EasyExcel.write(response.getOutputStream(), StockUpDownDomain.class).sheet("模板").doWrite(rows);
+        } catch (IOException e) {
+            log.error("当前页面:{} | 每页大小:{} | 当前时间: {} | 异常信息: {}", page, pageSize, e.getMessage(), DateTime.now().toString("yyy-MM-dd HH:mm"));
+//            throw new RuntimeException(e);
+            // 通知前端异常，稍后重试
+            response.setContentType("application/json");
+            response.setCharacterEncoding("utf-8");
+            R<Object> error = R.error(ResponseCode.ERROR);
+            try {
+                response.getWriter().write(error.toString());
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
     }
 }
