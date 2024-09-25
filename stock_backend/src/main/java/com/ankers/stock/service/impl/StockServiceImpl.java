@@ -17,6 +17,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.ApiModel;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Param;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -149,5 +150,73 @@ public class StockServiceImpl implements StockService {
                 throw new RuntimeException(ex);
             }
         }
+    }
+
+    /**
+     * 统计T日和T-1日每分钟交易量
+     * @return
+     */
+    @Override
+    public R<Map<String, List>> getCompareStockTradeAmt() {
+        DateTime tEndDateTime = DateTimeUtil.getLastDate4Stock(DateTime.now());
+        tEndDateTime = DateTime.parse( "2022-01-03 14:40:00", DateTimeFormat.forPattern("YYYY-MM-dd HH:mm:Ss"));
+        Date tEndDate = tEndDateTime.toDate();
+
+        // 开盘时间
+        Date tStartDate = DateTimeUtil.getOpenDate(tEndDateTime).toDate();
+
+        // 获取 T-1
+        DateTime preTEndDateTime = DateTimeUtil.getPreviousTradingDay(tEndDateTime);
+        preTEndDateTime = DateTime.parse( "2022-01-02 14:40:00", DateTimeFormat.forPattern("YYYY-MM-dd HH:mm:Ss"));
+        Date preTEndDate = preTEndDateTime.toDate();
+
+        Date preTStartDate = DateTimeUtil.getOpenDate(preTEndDateTime).toDate();
+
+        List<Map> tData = stockMarketIndexInfoMapper.getSumAmtInfo(tStartDate, tEndDate, stockInfoConfig.getInner());
+
+        List<Map> preData = stockMarketIndexInfoMapper.getSumAmtInfo(preTStartDate, preTEndDate, stockInfoConfig.getInner());
+
+        Map<String, List> map = new HashMap<>();
+        map.put("amtList", tData);
+        map.put("yesAmtList", preData);
+        return R.ok(map);
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public R<Map> getIncreaseRange() {
+
+        DateTime curDateTime = DateTimeUtil.getLastDate4Stock(DateTime.now());
+        curDateTime = DateTime.parse( "2022-01-06 09:55:00", DateTimeFormat.forPattern("YYYY-MM-dd HH:mm:Ss"));
+        Date endDate = curDateTime.toDate();
+
+        List<Map> infos = stockRtInfoMapper.getIncreaseRangeByDate(endDate);
+        List<String> upDownRange = stockInfoConfig.getUpDownRange();
+
+        List<Map> allInfos = new ArrayList<>();
+        for (String title: upDownRange) {
+            Map temp = null;
+            for (Map info : infos) {
+                if (info.containsValue(title)){
+                    temp = info;
+                    break;
+                }
+            }
+            if (temp == null) {
+                temp = new HashMap<>();
+                temp.put("title", title);
+                temp.put("count", 0);
+            }
+
+            allInfos.add(temp);
+        }
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("time", curDateTime.toString("yyyy-MM-dd HH:mm:ss"));
+        map.put("infos", allInfos);
+        return R.ok(map);
     }
 }

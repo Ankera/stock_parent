@@ -92,4 +92,24 @@ public class StockController {
                                       HttpServletResponse response) {
         stockService.exportStockUpDownInfo(page, pageSize, response);
     }
+
+    /**
+     * 统计T日和T-1日每分钟交易量
+     * @return
+     */
+    @ApiOperation(value = "统计T日和T-1日每分钟交易量", notes = "统计T日和T-1日每分钟交易量", httpMethod = "GET")
+    @GetMapping("/stock/tradeAmt")
+    public R<Map<String, List>> getCompareStockTradeAmt() {
+        return stockService.getCompareStockTradeAmt();
+    }
+
+    /**
+     * 统计最新交易时间点下股票(A股)在各个涨幅区间的数量
+     * @return
+     */
+    @ApiOperation(value = "统计最新交易时间点下股票(A股)在各个涨幅区间的数量", notes = "统计最新交易时间点下股票(A股)在各个涨幅区间的数量", httpMethod = "GET")
+    @GetMapping("/stock/upDown")
+    public R<Map> getIncreaseRange() {
+        return stockService.getIncreaseRange();
+    }
 }

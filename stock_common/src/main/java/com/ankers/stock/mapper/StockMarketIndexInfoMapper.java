@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
 * @author yuyayong
@@ -38,4 +39,12 @@ public interface StockMarketIndexInfoMapper {
 
     List<StockBlockDomain> getSectorIndustry(@Param("curDate") Date curDate);
 
+    /**
+     * 统计指定日期范围内，指定大盘每分钟的成交量流水信息
+     * @param openDate
+     * @param endDate
+     * @param marketCodes
+     * @return List<Map>
+     */
+    List<Map> getSumAmtInfo(@Param("openDate") Date openDate, @Param("endDate") Date endDate, @Param("marketCodes") List<String> marketCodes);
 }

@@ -31,4 +31,12 @@ public interface StockService {
      * @param response
      */
     void exportStockUpDownInfo(Integer page, Integer pageSize, HttpServletResponse response);
+
+    /**
+     * 统计T日和T-1日每分钟交易量
+     * @return
+     */
+    R<Map<String, List>> getCompareStockTradeAmt();
+
+    R<Map> getIncreaseRange();
 }

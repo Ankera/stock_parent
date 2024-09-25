@@ -63,6 +63,46 @@
         group by tmp.time;
     </select>
 
+<!--    阅读体验很不好 -->
+<!--    <select id="getIncreaseRangeByDate" resultType="java.util.Map">-->
+<!--        select title, count(*) as count-->
+<!--        from (select case-->
+<!--        when temp.ud > 0.07 then ">7%"-->
+<!--        when temp.ud > 0.05 and temp.ud &lt;= 0.07 then "5~7%"-->
+<!--        when temp.ud > 0.03 and temp.ud &lt;= 0.05 then "3~5%"-->
+<!--        when temp.ud > 0 and temp.ud &lt;= 0.03 then "0~3%"-->
+<!--        when temp.ud > -0.03 and temp.ud &lt;= 0.05 then "-3~0%"-->
+<!--        when temp.ud > -0.05 and temp.ud &lt;= 0.03 then "-5~3%"-->
+<!--        when temp.ud > -0.07 and temp.ud &lt;= 0.05 then "-7~5%"-->
+<!--        else '&lt;-7%'-->
+<!--        end as title-->
+<!--        from (select (cur_price - stock_rt_info.pre_close_price) / pre_close_price as ud-->
+<!--        from stock_rt_info-->
+<!--        where cur_time = #{curDate}) as temp) as temp2-->
+<!--        group by temp2.title;-->
+<!--    </select>-->
+
+<!--    当 sql 存在大量转义字符时，建议使用 CDATA， 不会对他进行转义-->
+    <select id="getIncreaseRangeByDate" resultType="java.util.Map">
+<![CDATA[
+        select title, count(*) as count
+        from (select case
+            when temp.ud > 0.07 then ">7%"
+            when temp.ud > 0.05 and temp.ud <= 0.07 then "5~7%"
+            when temp.ud > 0.03 and temp.ud <= 0.05 then "3~5%"
+            when temp.ud > 0 and temp.ud <= 0.03 then "0~3%"
+            when temp.ud > -0.03 and temp.ud <= 0.05 then "-3~0%"
+            when temp.ud > -0.05 and temp.ud <= 0.03 then "-5~-3%"
+            when temp.ud > -0.07 and temp.ud <= 0.05 then "-7~-5%"
+            else '<-7%'
+            end as title
+            from (select (cur_price - stock_rt_info.pre_close_price) / pre_close_price as ud
+            from stock_rt_info
+            where cur_time = #{curDate}) as temp) as temp2
+        group by temp2.title;
+]]>
+    </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete from stock_rt_info
         where  id = #{id,jdbcType=BIGINT} 

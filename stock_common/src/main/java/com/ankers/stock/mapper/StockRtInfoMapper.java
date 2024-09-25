@@ -43,4 +43,6 @@ public interface StockRtInfoMapper {
             @Param("startDate") Date startDate,
             @Param("endDate") Date endDate,
             @Param("flag") int flag);
+
+    List<Map> getIncreaseRangeByDate(@Param("curDate") Date curDate);
 }
