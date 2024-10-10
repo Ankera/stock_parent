@@ -1,5 +1,6 @@
 package com.ankers.stock.mapper;
 
+import com.ankers.stock.pojo.domain.Stock4EvrDayDomain;
 import com.ankers.stock.pojo.domain.Stock4MinuteDomain;
 import com.ankers.stock.pojo.domain.StockUpDownDomain;
 import com.ankers.stock.pojo.entity.StockRtInfo;
@@ -48,4 +49,6 @@ public interface StockRtInfoMapper {
     List<Map> getIncreaseRangeByDate(@Param("curDate") Date curDate);
 
     List<Stock4MinuteDomain> getStock4MinuteInfo(@Param("openDate") Date openDate, @Param("endDate") Date endDate, @Param("stockCode") String stockCode);
+
+    List<Stock4EvrDayDomain> getStockScreenDKline(@Param("openDate") Date openDate, @Param("endDate") Date endDate, @Param("stockCode") String stockCode);
 }

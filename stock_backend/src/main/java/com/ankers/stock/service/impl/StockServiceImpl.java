@@ -3,10 +3,7 @@ package com.ankers.stock.service.impl;
 import com.alibaba.excel.EasyExcel;
 import com.ankers.stock.mapper.StockMarketIndexInfoMapper;
 import com.ankers.stock.mapper.StockRtInfoMapper;
-import com.ankers.stock.pojo.domain.InnerMarketDomain;
-import com.ankers.stock.pojo.domain.Stock4MinuteDomain;
-import com.ankers.stock.pojo.domain.StockBlockDomain;
-import com.ankers.stock.pojo.domain.StockUpDownDomain;
+import com.ankers.stock.pojo.domain.*;
 import com.ankers.stock.pojo.vo.StockInfoConfig;
 import com.ankers.stock.service.StockService;
 import com.ankers.stock.utils.DateTimeUtil;
@@ -229,6 +226,20 @@ public class StockServiceImpl implements StockService {
         Date openDate = DateTimeUtil.getOpenDate(endDateTime).toDate();
 
         List<Stock4MinuteDomain> data = stockRtInfoMapper.getStock4MinuteInfo(openDate, endDate, stockCode);
+        return R.ok(data);
+    }
+
+    @Override
+    public R<List<Stock4EvrDayDomain>> getStockScreenDKline(String code) {
+
+        DateTime endDateTime = DateTimeUtil.getLastDate4Stock(DateTime.now());
+        endDateTime = DateTime.parse( "2022-06-06 14:25:00", DateTimeFormat.forPattern("YYYY-MM-dd HH:mm:Ss"));
+        Date endDate = endDateTime.toDate();
+
+        DateTime startDateTime = endDateTime.minusMonths(6);
+        Date startDate = startDateTime.toDate();
+
+        List<Stock4EvrDayDomain> data = stockRtInfoMapper.getStockScreenDKline(startDate, endDate, code);
         return R.ok(data);
     }
 }

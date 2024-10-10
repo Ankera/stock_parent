@@ -1,9 +1,6 @@
 package com.ankers.stock.controller;
 
-import com.ankers.stock.pojo.domain.InnerMarketDomain;
-import com.ankers.stock.pojo.domain.Stock4MinuteDomain;
-import com.ankers.stock.pojo.domain.StockBlockDomain;
-import com.ankers.stock.pojo.domain.StockUpDownDomain;
+import com.ankers.stock.pojo.domain.*;
 import com.ankers.stock.service.StockService;
 import com.ankers.stock.vo.resp.PageResult;
 import io.swagger.annotations.Api;
@@ -11,7 +8,6 @@ import com.ankers.stock.vo.resp.R;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,9 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
-@Api("/api/quot")
+@Api(tags = "股票接口服务")
 @RestController
 @RequestMapping("/api/quot")
 public class StockController {
@@ -129,6 +124,18 @@ public class StockController {
         return stockService.getStockScreenTimeSharing(code);
     }
 
-
+    /**
+     * 获取指定股票T天数据
+     * @param code
+     * @return
+     */
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", dataType = "string", name = "code", value = "", required = true)
+    })
+    @ApiOperation(value = "获取指定股票T天数据", notes = "获取指定股票T天数据", httpMethod = "GET")
+    @GetMapping("/stock/screen/dkline")
+    public R<List<Stock4EvrDayDomain>> getStockScreenDKline(@RequestParam(value = "code", required = true) String code) {
+        return stockService.getStockScreenDKline(code);
+    }
 }
 

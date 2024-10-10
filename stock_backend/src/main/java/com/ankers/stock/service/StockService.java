@@ -1,9 +1,6 @@
 package com.ankers.stock.service;
 
-import com.ankers.stock.pojo.domain.InnerMarketDomain;
-import com.ankers.stock.pojo.domain.Stock4MinuteDomain;
-import com.ankers.stock.pojo.domain.StockBlockDomain;
-import com.ankers.stock.pojo.domain.StockUpDownDomain;
+import com.ankers.stock.pojo.domain.*;
 import com.ankers.stock.vo.resp.PageResult;
 import com.ankers.stock.vo.resp.R;
 
@@ -41,5 +38,7 @@ public interface StockService {
 
     R<Map> getIncreaseRange();
 
-    R<List<Stock4MinuteDomain>> getStockScreenTimeSharing(String stockCode);
+    R<List<Stock4MinuteDomain>> getStockScreenTimeSharing(String code);
+
+    R<List<Stock4EvrDayDomain>> getStockScreenDKline(String code);
 }
