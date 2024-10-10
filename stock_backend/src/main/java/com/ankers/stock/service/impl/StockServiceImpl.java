@@ -4,6 +4,7 @@ import com.alibaba.excel.EasyExcel;
 import com.ankers.stock.mapper.StockMarketIndexInfoMapper;
 import com.ankers.stock.mapper.StockRtInfoMapper;
 import com.ankers.stock.pojo.domain.InnerMarketDomain;
+import com.ankers.stock.pojo.domain.Stock4MinuteDomain;
 import com.ankers.stock.pojo.domain.StockBlockDomain;
 import com.ankers.stock.pojo.domain.StockUpDownDomain;
 import com.ankers.stock.pojo.vo.StockInfoConfig;
@@ -218,5 +219,16 @@ public class StockServiceImpl implements StockService {
         map.put("time", curDateTime.toString("yyyy-MM-dd HH:mm:ss"));
         map.put("infos", allInfos);
         return R.ok(map);
+    }
+
+    @Override
+    public R<List<Stock4MinuteDomain>> getStockScreenTimeSharing(String stockCode) {
+        DateTime endDateTime = DateTimeUtil.getLastDate4Stock(DateTime.now());
+        endDateTime = DateTime.parse( "2021-12-30 14:30:00", DateTimeFormat.forPattern("YYYY-MM-dd HH:mm:Ss"));
+        Date endDate = endDateTime.toDate();
+        Date openDate = DateTimeUtil.getOpenDate(endDateTime).toDate();
+
+        List<Stock4MinuteDomain> data = stockRtInfoMapper.getStock4MinuteInfo(openDate, endDate, stockCode);
+        return R.ok(data);
     }
 }
