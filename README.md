@@ -54,5 +54,6 @@ https://qt.gtimg.cn/q=sh601003,sh601001
 安装rabbit
 https://blog.csdn.net/marsjin/article/details/135938937
 
-
+必须启动MQ
+sudo rabbitmq-server -detached
 ```
