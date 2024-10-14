@@ -45,6 +45,8 @@
           <option value="stock_job" />
           <option value="stock_job" />
           <option value="stock_job" />
+          <option value="stock_job" />
+          <option value="stock_job" />
         </list>
       </option>
       <option name="ignoredPackages">
@@ -83,10 +85,14 @@
           <option value="org.springframework:spring-beans:5.3.9" />
           <option value="org.springframework:spring-context:5.3.9" />
           <option value="org.springframework:spring-core:5.3.9" />
+          <option value="com.fasterxml.jackson.core:jackson-databind:2.12.4" />
+          <option value="com.fasterxml.woodstox:woodstox-core:5.3.0" />
         </list>
       </option>
       <option name="ignoredReasons">
         <list>
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
           <option value="Not exploitable" />
           <option value="Not exploitable" />
           <option value="Not exploitable" />

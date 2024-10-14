@@ -47,3 +47,12 @@ https://qt.gtimg.cn/q=sh601003,sh601001
 ```
 ![img_5.png](img_5.png)
 ![img_6.png](img_6.png)
+![img_7.png](img_7.png)
+
+#### rabbit
+```text
+安装rabbit
+https://blog.csdn.net/marsjin/article/details/135938937
+
+
+```

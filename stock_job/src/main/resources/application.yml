@@ -18,7 +18,7 @@ spring:
       maxWait: 60000
   profiles:
 #    # 激活其他配置文件 application-cache.yml, 多个文件 《,》 分割
-    active: stock
+    active: stock, mq
 # 配置mybatis
 mybatis:
   configuration:

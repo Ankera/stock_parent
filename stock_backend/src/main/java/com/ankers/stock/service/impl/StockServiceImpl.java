@@ -10,20 +10,18 @@ import com.ankers.stock.utils.DateTimeUtil;
 import com.ankers.stock.vo.resp.PageResult;
 import com.ankers.stock.vo.resp.R;
 import com.ankers.stock.vo.resp.ResponseCode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.ApiModel;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Param;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.github.benmanes.caffeine.cache.Cache;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.*;
 
@@ -44,22 +42,30 @@ public class StockServiceImpl implements StockService {
     @Autowired
     private StockRtInfoMapper stockRtInfoMapper;
 
+    @Autowired
+    private Cache<String, Object> caffeineCache;
+
     /**
      * 获取最新股票数据
      * @return
      */
     @Override
     public R<List<InnerMarketDomain>> getInnerMarketInfo() {
-        Date curDate = DateTimeUtil.getLastDate4Stock(DateTime.now()).toDate();
+        R<List<InnerMarketDomain>> result = (R<List<InnerMarketDomain>>) caffeineCache.get("innerMarketKey", key -> {
+            Date curDate = DateTimeUtil.getLastDate4Stock(DateTime.now()).toDate();
 
-//        模拟数据
-        curDate = DateTime.parse( "2022-05-13 15:00:00", DateTimeFormat.forPattern("YYYY-MM-dd HH:mm:Ss")).toDate();
+//          模拟数据
+            curDate = DateTime.parse( "2024-10-14 15:00:00", DateTimeFormat.forPattern("YYYY-MM-dd HH:mm:Ss")).toDate();
 
-        List<String> mCodes = stockInfoConfig.getInner();
+            List<String> mCodes = stockInfoConfig.getInner();
 
-        List<InnerMarketDomain> data = stockMarketIndexInfoMapper.getMarketInfo(curDate, mCodes);
+            List<InnerMarketDomain> data = stockMarketIndexInfoMapper.getMarketInfo(curDate, mCodes);
 
-        return R.ok(data);
+            return R.ok(data);
+        });
+
+        return  result;
+
     }
 
     /**

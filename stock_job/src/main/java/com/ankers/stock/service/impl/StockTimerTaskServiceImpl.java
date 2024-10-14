@@ -14,6 +14,7 @@ import com.ankers.stock.utils.ParserStockInfoUtil;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -54,6 +55,9 @@ public class StockTimerTaskServiceImpl implements StockTimerTaskService {
 
     @Autowired
     private StockRtInfoMapper stockRtInfoMapper;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     /**
      * bean 生命周期初始化之后
@@ -127,6 +131,8 @@ public class StockTimerTaskServiceImpl implements StockTimerTaskService {
 
         int count = stockMarketIndexInfoMapper.insertBatch(entities);
         if (count > 0) {
+            // 大盘数据采集完毕后，通知backend工程刷新缓存
+            rabbitTemplate.convertAndSend("stockExchange", "inner.market", new Date());
             log.info("当前时间:{}, 插入行数{}", DateTime.now().toString("yyyy-MM-dd HH:mm:ss"), count);
         } else {
             log.error("当前时间:{}, 插入行数{}", DateTime.now().toString("yyyy-MM-dd HH:mm:ss"), entities);

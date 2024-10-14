@@ -1,5 +1,7 @@
 package com.ankers.stock.config;
 
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +14,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * 定义redisTemplate的配置
  */
 @Configuration
-public class RedisCacheConfig {
+public class CacheConfig {
 
     @Bean
     public RedisTemplate restTemplate(@Autowired RedisConnectionFactory redisConnectionFactory) {
@@ -33,5 +35,16 @@ public class RedisCacheConfig {
         //初始化设置
         redisTemplate.afterPropertiesSet();
         return  redisTemplate;
+    }
+
+    @Bean
+    public Cache<String, Object> caffeineCache() {
+        Cache<String, Object> cache = Caffeine
+                .newBuilder()
+                .maximumSize(200)
+                .initialCapacity(100)
+                .recordStats()
+                .build();
+        return cache;
     }
 }
