@@ -1,6 +1,9 @@
 package com.ankers.stock.mapper;
 
 import com.ankers.stock.pojo.entity.StockBusiness;
+import com.ankers.stock.pojo.entity.StockRtInfo;
+
+import java.util.List;
 
 /**
 * @author yuyayong
@@ -22,4 +25,5 @@ public interface StockBusinessMapper {
 
     int updateByPrimaryKey(StockBusiness record);
 
+    List<String> getAllStockCodes();
 }

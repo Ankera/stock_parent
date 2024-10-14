@@ -38,3 +38,12 @@ http://192.168.31.237:8091/v2/api-docs
 ```
 ![img_2.png](img_2.png)
 ![img_3.png](img_3.png)
+
+#### 股票API
+```text
+https://hq.sinajs.cn/list=sh601003,sh601001
+
+https://qt.gtimg.cn/q=sh601003,sh601001
+```
+![img_5.png](img_5.png)
+![img_6.png](img_6.png)

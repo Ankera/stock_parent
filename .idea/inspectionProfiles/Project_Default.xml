@@ -34,6 +34,17 @@
           <option value="stock_backend" />
           <option value="stock_backend" />
           <option value="stock_backend" />
+          <option value="stock_backend" />
+          <option value="stock_job" />
+          <option value="stock_job" />
+          <option value="stock_job" />
+          <option value="stock_job" />
+          <option value="stock_job" />
+          <option value="stock_job" />
+          <option value="stock_job" />
+          <option value="stock_job" />
+          <option value="stock_job" />
+          <option value="stock_job" />
         </list>
       </option>
       <option name="ignoredPackages">
@@ -61,10 +72,32 @@
           <option value="org.springframework:spring-context:5.3.9" />
           <option value="org.springframework:spring-core:5.3.9" />
           <option value="cn.hutool:hutool-all:5.7.21" />
+          <option value="mysql:mysql-connector-java:8.0.26" />
+          <option value="com.github.pagehelper:pagehelper:5.1.10" />
+          <option value="com.google.code.gson:gson:2.8.7" />
+          <option value="com.google.guava:guava:30.0-jre" />
+          <option value="mysql:mysql-connector-java:8.0.26" />
+          <option value="org.apache.commons:commons-compress:1.19" />
+          <option value="org.springframework.boot:spring-boot-autoconfigure:2.5.3" />
+          <option value="org.springframework.boot:spring-boot:2.5.3" />
+          <option value="org.springframework:spring-beans:5.3.9" />
+          <option value="org.springframework:spring-context:5.3.9" />
+          <option value="org.springframework:spring-core:5.3.9" />
         </list>
       </option>
       <option name="ignoredReasons">
         <list>
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
           <option value="Not exploitable" />
           <option value="Not exploitable" />
           <option value="Not exploitable" />

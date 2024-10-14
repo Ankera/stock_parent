@@ -8,12 +8,5 @@ stock:
     - int_hangseng # 恒生
     - int_nikkei # 日经指数
     - b_FSSTI
-  upDownRange:
-    - "<-7%"
-    - "-7~-5%"
-    - "-5~-3%"
-    - "-3~0%"
-    - "0~3%"
-    - "3~5%"
-    - "5~7%"
-    - ">7%"
+  marketUrl: https://hq.sinajs.cn/list=
+  blockUrl: https://vip.stock.finance.sina.com.cn/q/view/newSinaHy.php
