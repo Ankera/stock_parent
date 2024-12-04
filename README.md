@@ -1,4 +1,4 @@
-## stock_parent
+## stock_parent !!
 该项目是java练习项目
 
 #### 配置JDK参考如下
@@ -56,4 +56,29 @@ https://blog.csdn.net/marsjin/article/details/135938937
 
 必须启动MQ
 sudo rabbitmq-server -detached
+
+http://localhost:15672/
+```
+
+#### XXL-job
+```text
+https://www.xuxueli.com/xxl-job/
+
+/Users/yuyayong/Documents/github/stock_parent
+在这个目录下运行                                
+
+docker run -e PARAMS="--spring.datasource.url=jdbc:mysql://localhost:3306/xxl_job?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=UTC&failOverReadOnly=false&maxReconnects=10 --spring.datasource.username=root --spring.datasource.password=12345678 --spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver" -p 8093:8080 -v $PWD/xxldata:/data/applogs --name=xxl-job-admin -d xuxueli/xxl-job-admin:2.3.0
+
+docker stop xxl-job-admin
+
+/opt/homebrew/etc/my.cnf
+增加一行
+wait_timeout=86400
+
+http://localhost:8093/xxl-job-admin/toLogin
+admin
+123456
+
+docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 -d mysql:latest
+
 ```
